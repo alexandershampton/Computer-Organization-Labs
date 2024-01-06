@@ -1,0 +1,14 @@
+.ORIG x3000
+AND R0, R0, #0
+LD R1, loopCount
+;
+LOOP ADD R2, R1, R0
+BRnz END_PROGRAM
+ADD R3, R3, #1; register that tracks how many loops
+ADD R0, R0, #-2; subtracts 2 from R0 until R0 is negative R2
+BRnzp LOOP
+;
+END_PROGRAM HALT
+;
+loopCount .FILL x000A; how many times to loop
+.END

@@ -1,0 +1,22 @@
+.ORIG x3000
+LD R1, maxIterations
+AND R2, R2, #0; loop tracker
+AND R3, R3, #0; holds additions of 5
+;
+AND R1, R1, R1
+BRz END_PROGRAM
+;
+ADDING_LOOP AND R4, R4, #0; REGISTER FOR MATH
+ADD R3, R3, #5; adds 5 to R3
+ADD R2, R2 , #1; tracks amount of loops
+AND R5, R5, #0; holds twos complement of R2 (LOOP TRACKER)
+NOT R5, R2
+ADD R5 R5, #1
+ADD R4, R1, R5;
+BRnp ADDING_LOOP; starts loop again if counter is still positive
+BRz END_PROGRAM
+;
+END_PROGRAM HALT
+;
+maxIterations .FILL x0005; number of iterations
+.END

@@ -1,0 +1,29 @@
+.ORIG x3000
+LD R0, x
+LD R1, y
+AND R2, R2, #0 
+;
+AND R0, R0, R0; checks if x>0
+BRz END_PROGRAM; checks if x=0
+;
+LD R3, num; loads 1 into R3 if R0 > 0
+;
+AND R1, R1, R1; checks if y>0
+BRz END_PROGRAM; checks if y=0
+;
+OUTER_LOOP LD R0, x; resets inner loop counter
+INNER_LOOP ADD R2, R2, R3; adds the math
+ST R2, z
+ADD R0, R0 , #-1;  inner loop counter
+BRp INNER_LOOP; starts inner loop again until counter is zero
+LD R3, z
+AND R2, R2, #0; sets R2 to zero
+ADD R1, R1, #-1 ; outer loop counter
+BRp OUTER_LOOP; starts outerloop again if counter is still positive
+;
+END_PROGRAM HALT
+x .FILL x0005; x variable
+y .FILL x0001; y variable
+z .FILL x0000; z variable
+num .FILL x0001; num added to z
+.END
